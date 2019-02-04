@@ -18,7 +18,7 @@ class ActorClip {
 }
 
 class ActorNode extends ActorComponent {
-  List<ActorNode> _children;
+  List<ActorNode> _children = List<ActorNode>();
   //List<ActorNode> m_Dependents;
   Mat2D _transform = Mat2D();
   Mat2D _worldTransform = Mat2D();
@@ -181,7 +181,7 @@ class ActorNode extends ActorComponent {
     ActorNode clipSearch = this;
     while (clipSearch != null) {
       if (clipSearch.clips != null) {
-		  all.add(clipSearch.clips);
+        all.add(clipSearch.clips);
       }
       clipSearch = clipSearch.parent;
     }
@@ -257,9 +257,6 @@ class ActorNode extends ActorComponent {
       node.parent._children.remove(node);
     }
     node.parent = this;
-    if (_children == null) {
-      _children = List<ActorNode>();
-    }
     _children.add(node);
   }
 
@@ -359,15 +356,13 @@ class ActorNode extends ActorComponent {
   }
 
   bool eachChildRecursive(NodeWalkCallback cb) {
-    if (_children != null) {
-      for (ActorNode child in _children) {
-        if (cb(child) == false) {
-          return false;
-        }
+    for (ActorNode child in _children) {
+      if (cb(child) == false) {
+        return false;
+      }
 
-        if (child.eachChildRecursive(cb) == false) {
-          return false;
-        }
+      if (child.eachChildRecursive(cb) == false) {
+        return false;
       }
     }
     return true;
