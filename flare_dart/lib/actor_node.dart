@@ -181,7 +181,7 @@ class ActorNode extends ActorComponent {
     ActorNode clipSearch = this;
     while (clipSearch != null) {
       if (clipSearch.clips != null) {
-		  all.add(clipSearch.clips);
+        all.add(clipSearch.clips);
       }
       clipSearch = clipSearch.parent;
     }
@@ -378,12 +378,14 @@ class ActorNode extends ActorComponent {
       return false;
     }
 
-    for (ActorNode child in _children) {
-      if (cb(child) == false) {
-        return false;
-      }
+    if (_children != null) {
+      for (ActorNode child in _children) {
+        if (cb(child) == false) {
+          return false;
+        }
 
-      child.eachChildRecursive(cb);
+        child.eachChildRecursive(cb);
+      }
     }
 
     return true;
