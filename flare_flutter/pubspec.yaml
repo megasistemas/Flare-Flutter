@@ -8,7 +8,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flare_dart: ^1.2.2
+  flare_dart: 
+    git:
+      url: https://github.com/megasistemas/Flare-Flutter.git
+      path: flare_dart
+      ref: fix_40_v2
   # flare_dart:
   #   path: ../flare_dart
 dev_dependencies:
